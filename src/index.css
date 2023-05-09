@@ -11,3 +11,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+<<<<<<< HEAD
+=======
+.bgmarket{
+  background-color: #000000;
+height: auto !important;
+min-height: 100%;
+}
+>>>>>>> 4509fc1 (Add existing project files to Git)
