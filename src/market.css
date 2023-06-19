@@ -120,8 +120,7 @@
 }
 
 .iconFilter{
-  margin:20% 20%;
-  font-size:250% ;  
+  font-size:220% ;  
   color: black;
 }
 .iconFilter:hover{
@@ -446,4 +445,33 @@ margin-left: 3%;
   font-weight: 22px;
   font-size: 10px;
   text-align: center;
+}
+/* ///////////////////////// */
+.dropdown {  
+  position: absolute;  
+  display: inline-block;  
+}  
+
+/* provide css to background of list items */   
+#list-items {  
+ display: none;  
+ z-index: 1;
+ position: absolute; 
+ margin-top: 10%;
+ margin-left: -250%; 
+ background-color: #141414;  
+ min-width: 200px;  
+ border-radius: 5px;
+}  
+/* provide css to list items */   
+#list-items a {  
+  display: block;  
+  font-size: 20px;  
+  color: #FFFFFF;  
+  text-decoration: none;  
+  border-radius: 5px;
+  padding:10px;
+}
+#list-items a:hover {  
+  background-color: #515151;  
 }
