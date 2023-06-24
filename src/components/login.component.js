@@ -8,7 +8,12 @@ import App from '../App'
 function Login(){
   const [style, setStyle] = useState("left");
   const [style2, setStyle2] = useState("imgs");
-  const [input,setInput,setError] = useState({
+  const [input,setInput] = useState({
+    email: '',
+    password: '',
+  });
+
+  const [error,setError] = useState({
     email: '',
     password: '',
   });
@@ -67,14 +72,16 @@ const validateInput = e => {
       email: input.email,
       password: input.password
     };
-      await axios.post("https://car-mate-t012.onrender.com/api/v1/users/login", userData).then( (response) => {
-      console.log(response.status, response.data.token);
-      let userToken=response.data.token;
-      <>
-      <Market userToken={response.data.token} />
-      <App userToken={response.data.token} />
-      </>
-      navigate('/Market',{replace:true});
+    await axios.post("https://car-mate-t012.onrender.com/api/v1/users/login", userData).then( (response) => {
+      console.log(response.status, response.data.token,response.data.userId);
+      const tokrnn=response.data.token;
+      const userId=response.data.userId;
+      navigate('/Market',{
+        state: {
+            token: {tokrnn},
+            userId: {userId}
+        },
+      });
     })
     
     .catch(function (error) {
@@ -122,6 +129,7 @@ const validateInput = e => {
             className="form-control m-auto"
             placeholder="Enter email"
             name="email"
+            autoComplete='current-email'
             value={input.email}
             onChange={onInputChange}
             onBlur={validateInput}
@@ -135,9 +143,10 @@ const validateInput = e => {
           <label className='lab'>Password</label>
           <input
             type="password"
-            className="form-control m-auto"
+            className="form-control m-auto "
             placeholder="Enter password"
             name="password"
+            autoComplete='current-email'
             value={input.password}
             onChange={onInputChange}
             onBlur={validateInput}
@@ -157,7 +166,7 @@ const validateInput = e => {
               id="customCheck1"
               
             />
-            <label className="custom-control-label rme" For="customCheck1">
+            <label className="custom-control-label rme" htmlFor="customCheck1">
               Remember me
             </label>
 
