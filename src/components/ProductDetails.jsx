@@ -29,6 +29,10 @@ function ProductDetails(props){
     token=location.state.data.token;
     userId=location.state.data.userId;
     }
+  if(location?.state?.data != null){
+    token=location.state.data.token.tokrnn;
+    userId=location.state.data.userId;
+    }
   if(location?.state?.data?.props != null){
     token=location.state.data.props.token;
     userId=location.state.data.props.userId;
@@ -121,18 +125,23 @@ const descendingRating=()=>{
 ////////////BUY PRODUCT////////////////
 const buyProduct =(e)=>{
   e.preventDefault();
-  console.log(product._id);
   let data={
     success_url:"https://car-mate-bz2u.onrender.com",
     cancel_url:"https://car-mate-bz2u.onrender.com",
-    Quantity:1
+    products:
+    [
+        {
+            id: product._id,
+            Quantity : 1
+        }
+    ]
   }
-  axios.post(`https://car-mate-t012.onrender.com/api/v1/prodcuts/buy/${product._id}`,data,{ headers: {
+  axios.post(`https://car-mate-t012.onrender.com/api/v1/prodcuts/buy`,data,{ headers: {
     'Content-Type': 'application/json',
     'authorization': 'Bearer ' + token
-  } }).then((response)=>{
+  }}).then((response)=>{
   console.log(response.data);
-  
+  window.location.replace(response.data.url);
   })
     .catch(function (error) {
       if (error.response) {

@@ -1,7 +1,5 @@
 import { NavLink, useLocation } from "react-router-dom";
 import Navbar from "./navbar";
-import { HiBarsArrowDown } from "react-icons/hi2";
-import { BsSearch } from "react-icons/bs";
 import Favoritemap from "./favoritemap";
 
 function FavoriteList() {
