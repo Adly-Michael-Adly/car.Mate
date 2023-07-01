@@ -288,7 +288,6 @@ console.log(token);
   const formSubmit =(e)=>{
     e.preventDefault();
   let data={
-    summery: "aa",
     Name: name,
     Condition: condition,
     Description: description,
