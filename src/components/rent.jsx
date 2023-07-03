@@ -8,9 +8,10 @@ import { useEffect, useState } from "react";
 import Product from "./product";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import axios from 'axios';
 
 
-function Market(props){
+function Rent(props){
   let token="";
   let userId="";
   let location = useLocation();
@@ -41,48 +42,47 @@ function Market(props){
       click2.style.transform= "rotatex(180deg)";
     }}
 ////////////SORT//////////////
-const apiurl='https://car-mate-t012.onrender.com/api/v1/prodcuts?limit=200&page=1';
-const [tempList,setTempList]=useState([]);
+const apiurl='https://car-mate-t012.onrender.com/api/v1/rents';
+const [tempList2,setTempList2]=useState([]);
 const [searchApiData, setSearchApiData] = useState([]);
 const [filterVal, setFilterVal] = useState('');
 useEffect(() =>{
-    fetchData()
+    fetchData();
 },[]);
-const fetchData=()=>{
-    fetch(apiurl)
-    .then((res) =>res.json())
-    .then(json=>{
-      setTempList(json.product)
-      setSearchApiData(json.product)
+const fetchData= ()=>{
+    axios.get('https://car-mate-t012.onrender.com/api/v1/rents').then((res)=>{
+      setTempList2(res.data.rent);
+      setSearchApiData(res);
+      console.log(res);
   })
 }
 const ascendingEvent=()=>{
-    let data=[...tempList]
+    let data=[...tempList2]
     if(data.length > 0){
        let result= data.sort((a,b)=> a.Price - b.Price)
-       setTempList(result)
+       setTempList2(result)
     }}
 const descendingEvent=()=>{
-    let data=[...tempList]
+    let data=[...tempList2]
     if(data.length > 0){
        let result= data.sort((a,b)=> b.Price - a.Price)
-       setTempList(result)
+       setTempList2(result)
     }
 }
 const descendingRating=()=>{
-    let data=[...tempList]
+    let data=[...tempList2]
     if(data.length > 0){
        let result= data.sort((a,b)=> b.RatingsAverage - a.RatingsAverage)
-       setTempList(result)
+       setTempList2(result)
     }
 }
 //////////SEARCH FILTER/////////////
 const onChaneHandle=(e)=>{
   if(e.target.value === ""){
-      setTempList(searchApiData)
+      setTempList2(searchApiData)
   }else{
       const serarchRessult=searchApiData.filter(item => item.Name.toLowerCase().includes(e.target.value.toLowerCase()) ||  item.Condition.toLowerCase().includes(e.target.value.toLowerCase()))
-      setTempList(serarchRessult);
+      setTempList2(serarchRessult);
   }
   setFilterVal(e.target.value)
 }
@@ -94,7 +94,7 @@ const deleteProduct =(Product)=>{
   })
   .then((data)=>{if(data.isConfirmed){
     // fetch(`https://car-mate-t012.onrender.com/api/v1/prodcuts/${Product._id}`,{
-    fetch(`https://car-mate-t012.onrender.com/api/v1/prodcuts/`,{
+    fetch(`https://car-mate-t012.onrender.com/api/v1/rents/`,{
       method:"DELETE",
       headers:{
         'Contect-Type':'application/json',
@@ -165,11 +165,11 @@ const deleteProduct =(Product)=>{
           {/* ////////////////////////// */}
           <div id="cards" className="row row-cols-1 col-lg row-cols-md-3 g-5 m-5 cards ">
 
-          {tempList && tempList.length > 0 && tempList !== undefined ? tempList.map((item) =>{
+          {tempList2 && tempList2.length > 0 && tempList2 !== undefined ? tempList2.map((item) =>{
         return(
              <div className="col cardp" key={item._id}  >
                <button className='pull-right btn-close btn-close-white' onClick={()=>deleteProduct(item)} aria-label='close'></button>
-                 <Link state={{ data:  {token:token, userId:userId} }} to={`/product/${item._id}`}  className="noink" >
+                 <Link state={{ data:  {token:token, userId:userId} }} to={`/rents/${item._id}`}  className="noink" >
                   <Product prodcut={item} token={token} userId={userId}/>
                </Link>
 
@@ -186,4 +186,4 @@ const deleteProduct =(Product)=>{
         </>
     );
   }
-export default Market;
+export default Rent;

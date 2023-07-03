@@ -69,11 +69,11 @@ console.log(userId);
     <div id="cards" className="row row-cols-1 col-lg row-cols-md-3 g-5 m-5 cards ">
 
 
-        {arraypro?.map((prodcut,i)=> {
+        {arraypro?.map((prodcut)=> {
           return(
-            <div className="col cardp" key={i}  >
-          <Link to={`/product/${prodcut._id}`}  className="noink" >
-           <Productfav prodcut={prodcut} tokenandId={props}/>
+            <div className="col cardp" key={prodcut._id}  >
+          <Link replace state={{ data: {token:token, userId:userId} }} to={`/product/${prodcut._id}`}  className="noink" >
+           <Productfav prodcut={prodcut} token={token} userId={userId} tokenandId={props}/>
            </Link>
       </div>
   )

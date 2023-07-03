@@ -18,7 +18,7 @@ import axios from "axios";
 
 
 //////////////////////////
-function ProductDetails(props){
+function RentDetails(props){
   let token="";
   let userId="";
   let location = useLocation();
@@ -43,7 +43,7 @@ function ProductDetails(props){
 
 
 
-    const apiurl='https://car-mate-t012.onrender.com/api/v1/prodcuts';
+    const apiurl='https://car-mate-t012.onrender.com/api/v1/rents';
     const params=useParams();
     const [product,setProduct]=useState([]);
   /////////////PRODUCT IMG////////////////
@@ -127,7 +127,7 @@ const descendingRating=()=>{
 const buyProduct =(e)=>{
   e.preventDefault();
   let data={
-    success_url:"/market",
+    success_url:"https://car-mate-bz2u.onrender.com",
     cancel_url:"https://car-mate-bz2u.onrender.com",
     products:
     [
@@ -285,4 +285,4 @@ const buyProduct =(e)=>{
    
     )
 }
-export default ProductDetails;
+export default RentDetails;

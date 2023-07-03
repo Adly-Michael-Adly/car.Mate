@@ -6,6 +6,24 @@ import {BsImages} from 'react-icons/bs'
 import {TbCurrentLocation} from 'react-icons/tb'
 
 function AddProduct(props){
+  let location = useLocation();
+  let token='';
+  let userId='';
+  if(location?.state?.data?.props != null){
+    token=location.state.data.props.token;
+    userId=location.state.data.props.userId;
+  }
+  else  if(location?.state?.data != null){
+    token=location.state.data.token;
+    userId=location.state.data.userId;
+  }
+  console.log(token);
+
+
+  const [imgCover,setImgCover]=useState();
+  const [img1,setImg1]=useState();
+  const [img2,setImg2]=useState();
+  const [img3,setImg3]=useState();
 //////////////////drop image//////////////////
 const dragArea1= document.getElementById('img1');
 const dragArea2= document.getElementById('img2');
@@ -182,6 +200,7 @@ if(validExtensions.includes(fileType)){
     let fileURL = fileReader.result;
     let imgTag = `<img src="${fileURL}" alt=""/>`;
     dragArea1.innerHTML=imgTag;
+    setImgCover(fileURL);
   };
   fileReader.readAsDataURL(file);
 }else{
@@ -201,6 +220,7 @@ if(validExtensions.includes(fileType)){
     let fileURL = fileReader.result;
     let imgTag = `<img src="${fileURL}" alt=""/>`;
     dragArea2.innerHTML=imgTag;
+    setImg1(fileURL);
   };
   fileReader.readAsDataURL(file);
 }else{
@@ -220,6 +240,7 @@ if(validExtensions.includes(fileType)){
     let fileURL = fileReader.result;
     let imgTag = `<img src="${fileURL}" alt=""/>`;
     dragArea3.innerHTML=imgTag;
+    setImg2(fileURL);
   };
   fileReader.readAsDataURL(file);
 }else{
@@ -239,6 +260,7 @@ if(validExtensions.includes(fileType)){
     let fileURL = fileReader.result;
     let imgTag = `<img src="${fileURL}" alt=""/>`;
     dragArea4.innerHTML=imgTag;
+    setImg3(fileURL);
   };
   fileReader.readAsDataURL(file);
 }else{
@@ -276,17 +298,14 @@ useEffect(() =>{
     }
 },[]);
 //////////////////////////////////////
-let location = useLocation();
-let token='';
-let userId='';
-if(location?.state?.data?.props != null){
-  token=location.state.data.props.token;
-  userId=location.state.data.props.userId;
-}
-console.log(token);
-///////////////////////////////////
   const formSubmit =(e)=>{
     e.preventDefault();
+    const formData = new FormData()
+    formData.append('imageCover',imgCover)
+    formData.append('Images',img1)
+    formData.append('Images',img2)
+    formData.append('Images',img3)
+
   let data={
     Name: name,
     Condition: condition,
@@ -308,8 +327,14 @@ console.log(token);
     'authorization': 'Bearer ' + token
   } }).then((response)=>{
   console.log(response.data);
-  
+ 
+  axios.patch(`https://car-mate-t012.onrender.com/api/v1/prodcuts/addImage/${response.data.message._id}`,formData,{ headers: {
+    'Content-Type': 'application/form-data',
+    'authorization': 'Bearer ' + token
+  } }).then((response)=>{
+  console.log(response.data);
   })
+})
     .catch(function (error) {
       if (error.response) {
         // The request was made and the server responded with a status code
@@ -395,8 +420,8 @@ console.log(token);
       <select name="Type" className="inputAddPro" id="inputCategory" onChange={(e)=>setType(e.target.value)}>
       <option hidden>select ...</option>
       <option value={"Car"}>Car</option>
-      <option value={"Accessorie"}>Accessorie</option>
-      <option value={"Car Part"}>Car Part</option>
+      <option value={"Accessories"}>Accessorie</option>
+      <option value={"Car Parts"}>Car Part</option>
       </select>
     </div>
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink,Link } from "react-router-dom";
+import { NavLink,Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Product from "./product";
 import NavbarC from "./navbarC";
@@ -7,7 +7,13 @@ import {HiBarsArrowDown} from 'react-icons/hi2'
 import {BsSearch} from 'react-icons/bs'
 
 function Onlycars(){
-
+  let token="";
+  let userId="";
+  let location = useLocation();
+  if(location?.state?.data != null){
+    token=location.state.data.token;
+    userId=location.state.data.userId;
+  }
     const apiurl2='https://car-mate-t012.onrender.com/api/v1/prodcuts?Type=Car';
     // const [prodcuts2,setProducts2]=useState([]);
     // useEffect(() =>{ 
@@ -76,7 +82,7 @@ const onChaneHandle=(e)=>{
         <> 
   <body className="bgmarket">
     <div>
-    <NavbarC />
+    <NavbarC token={token} userId={userId} />
     </div>
     <div className="cont">
       <h2 className="Marketheader p-0">Find your perfect item 
@@ -92,22 +98,22 @@ const onChaneHandle=(e)=>{
    {/* ///////////////////////////////////// */}
     <ul className="nav mt-5 ms-5 p-0 marketheadnav" id="pills-tab" role="tablist">
       <li className="nav-item" role="presentation">
-      <NavLink to="/market">
+      <NavLink state={{ data: {token:token, userId:userId} }} to="/market">
         <button className="marketheadnav2" id='item'  >  All items</button>
     </NavLink>
       </li>
       <li className="nav-item" role="presentation">
-      <NavLink to="/onlycars" >
+      <NavLink state={{ data: {token:token, userId:userId} }} to="/onlycars" >
         <button className="marketheadnav2 bg-primary" id='car'  >Cars</button>
     </NavLink>
       </li>
       <li className="nav-item " role="presentation">
-      <NavLink to="/onlyaccessories" >
+      <NavLink state={{ data: {token:token, userId:userId} }} to="/onlyaccessories" >
         <button className="marketheadnav2" id='access' >Accessories</button>
     </NavLink>
       </li>
       <li className="nav-item" role="presentation">
-      <NavLink to="/onlyparts" >
+      <NavLink state={{ data: {token:token, userId:userId} }} to="/onlyparts" >
         <button className="marketheadnav2" id='parts'  >Car parts</button>
     </NavLink>
       </li>
@@ -131,8 +137,8 @@ const onChaneHandle=(e)=>{
 {tempList && tempList.length > 0 && tempList !== undefined ? tempList.map((item,i) =>{
 return(
    <div className="col cardp" key={item._id}  >
-       <Link to={`/product/${item._id}`}  className="noink" >
-        <Product prodcut={item}/>
+       <Link state={{ data: {token:token, userId:userId} }} to={`/product/${item._id}`}  className="noink" >
+        <Product prodcut={item} token={token} userId={userId}/>
      </Link>
    </div>
 )
