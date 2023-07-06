@@ -1,7 +1,7 @@
 import { Rating } from "@mui/material";
-import {  MdOutlineFavorite } from "react-icons/md";
+import {  MdFavoriteBorder } from "react-icons/md";
 import axios from "axios";
-function Productfav(props){
+function ProductRent(props){
   const {prodcut}=props;
   console.log(props);
 
@@ -44,23 +44,16 @@ console.log(response.data);
 <div  className="card">
       <img src={prodcut.imageCover} className="card-img-top imagecover" alt={prodcut.Type} />
       
-      < a className="favoo" onClick={favorite} style={{position:'absolute',fontSize:'2vw',left:'90%', color:'blue' }} ><MdOutlineFavorite className="favoo" /></a>
+      < a onClick={favorite} style={{position:'absolute',fontSize:'2vw',left:'90%'}} ><MdFavoriteBorder id="checkfavo" /></a>
       <div className="card-body d-flex flex-column align-items-center text-center pb-0" >
         <h5 className="card-title namemarket">{prodcut.Name}</h5>
-        <h5 className="card-title text-white namemarket">$ {prodcut.Price}</h5>
-        <Rating className="pt-2 rating" name="read-only" value={prodcut.RatingsAverage} precision={0.1} size="small" readOnly />
-      </div>
-
-      <div className="card-footer">
-        <small className="text-white foter">
-          <small className="float-end text-white foter mt-1">Quantity: {prodcut.Quantity}</small>
-          <img src="/Condition.png" className="mb-1" alt="Condition" />
-          {prodcut.Condition}
-          </small>
+        <h5 className="card-title text-white namemarket">$ {prodcut.Price} / day</h5>
+        <Rating sx={{'& .MuiRating-iconFilled':{color:'blue'}, '& .MuiRating-iconEmpty':{color:'blue'}}}
+         className="pt-2 rating" name="read-only" value={prodcut.RatingsAverage} precision={0.1} size="small" readOnly />
       </div>
     </div> 
 
 
     );
 }
-export default Productfav;
+export default ProductRent;
