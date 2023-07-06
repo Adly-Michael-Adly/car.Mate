@@ -254,7 +254,7 @@ const buyProduct =(e)=>{
              <p>The Condition is : {product.Condition}</p>
              <p>The quantity is avaiable : {product.Quantity}</p>
              <p>
-               {showMore ? text : `${text.substring(0, 50)}`}
+               {showMore ? text : `${text.substring(0, 10)}`}
               <small className=" seemore"  onClick={() => setShowMore(!showMore)}>
               {showMore ? " (Show less)" : "...Show more"}
               </small>
