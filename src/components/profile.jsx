@@ -138,6 +138,7 @@ setUserEdit(response.data.message)
         </div>
         <span className="headerr">Drop your Photo here</span>
       </div>
+      <img src='car mate-01.png' className='logopro2'  alt='project logo'></img>
 
       <div className="edit buttonn">
         <FiEdit className="editIcon"></FiEdit>
@@ -202,14 +203,19 @@ setUserEdit(response.data.message)
          <FiEdit className="editIconT"></FiEdit>
        </div>
        <div class="input-container t5">
-         <input placeholder="250,000" class="input-field if5" type="password"/>
-         <label htmlFor="input-field" class="input-label">MONEY</label>
+         <input  class="input-field if5" type="double" value={userEdit.Balance}/>
+         <label htmlFor="input-field" class="input-label">BALANCE</label>
          <span class="input-highlight"></span>
        </div>
 
       </div>
 
-
+      <div className="lists">
+      <div className="list1"></div>
+      <div className="list2"></div>
+      <div className="list3"></div>
+      <div className="list4"></div>
+     </div>
   </div>
 </body>
     </> 

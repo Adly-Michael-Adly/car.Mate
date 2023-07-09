@@ -19,8 +19,10 @@ import FavoriteList from './components/favoriteList'
 import Rent from './components/rent'
 import RentDetails from './components/rentDetails'
 import Profile from './components/profile'
+import AddRent from './components/addrent'
 
-function App(userToken) {
+
+function App() {
       
   return (
     
@@ -34,6 +36,7 @@ function App(userToken) {
             <Route path="/forgot" element={<Forget />} />
             <Route path="/reset" element={<Reset />} />
             <Route path="/addproduct" element={<AddProduct />} />
+            <Route path="/addrent" element={<AddRent />} />
             <Route path="/onlycars" element={<Onlycars/>} />
             <Route path="/onlyaccessories" element={<Onlyaccessories/>} />
             <Route path="/onlyparts" element={<Onlyparts/>} />

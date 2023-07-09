@@ -139,3 +139,27 @@ margin: 0% 5%;
   color: #ffffff;
   cursor: pointer;
 }
+.logopro2{
+  width: 25vw;
+  left: 39vw;
+  top: 0vh;
+  position: absolute;
+}
+.lists{
+  position: absolute;
+}
+
+.list1{
+  /* background-color: #007bff;
+  width: 30vw;
+  height: 20vh; */
+}
+.list2{
+  background-color: aqua;
+}
+.list3{
+  background-color: brown;
+}
+.list4{
+  background-color: chartreuse;
+}
