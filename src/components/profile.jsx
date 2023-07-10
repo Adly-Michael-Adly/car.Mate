@@ -5,13 +5,14 @@ import React from 'react';
 import { FiEdit } from "react-icons/fi";
 import { MdOutlineAddAPhoto } from "react-icons/md";
 import { FaExpeditedssl } from "react-icons/fa";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Product from "./product";
 import ProductRent from './productRent';
 import { Link } from "react-router-dom";
 
 function Profile(){
- 
+  const navigate = useNavigate();
+
   const [input,setInput] = useState({
     password: '',
     newpassword: '',
@@ -32,7 +33,8 @@ function Profile(){
     }
     console.log(token);
     ///////////////////////////////
-    
+    let tokrnn=token;
+
 useEffect(() =>{
     const dragArea= document.querySelector(' .drag-areaa');
     const dragText= document.querySelector('.headerr');
@@ -109,6 +111,13 @@ setUserEdit(response.data.message)
 })
 .catch(function (error) {
         if (error.response) {
+          alert('You are not logged in please log in first.');
+          navigate('/Market',{
+            state: {
+                token: {tokrnn},
+                userId: {userId}
+            },
+          });
           // The request was made and the server responded with a status code
           // that falls out of the range of 2xx
     }
