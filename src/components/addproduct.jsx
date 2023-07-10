@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import Navbar from "./navbar";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import {BsImages} from 'react-icons/bs'
 import {TbCurrentLocation} from 'react-icons/tb'
 
-function AddProduct(props){
+function AddProduct(){
   let location = useLocation();
   let token='';
   let userId='';
@@ -13,7 +13,7 @@ function AddProduct(props){
     token=location.state.data.props.token;
     userId=location.state.data.props.userId;
   }
-  else  if(location?.state?.data != null){
+  else if(location?.state?.data != null){
     token=location.state.data.token;
     userId=location.state.data.userId;
   }
@@ -365,9 +365,9 @@ useEffect(() =>{
    
    <div className="cont">
    <h2 className="Marketheader p-0">Add New Product </h2>
-   <form action="/addrent">
+   <Link state={{ data: {token:token, userId:userId} }} to="/addrent">
    <button className="torent toupload">Rent Car</button>
-   </form>
+   </Link>
 
    <form className="p-5 formlogin" onSubmit={formSubmit}>
   <div className=" bigCont">

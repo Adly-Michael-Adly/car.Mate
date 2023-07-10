@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import Navbar from "./navbar";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import {BsImages} from 'react-icons/bs'
 import {TbCurrentLocation} from 'react-icons/tb'
 
-function AddRent(props){
+function AddRent(){
   let location = useLocation();
   let token='';
   let userId='';
@@ -13,7 +13,7 @@ function AddRent(props){
     token=location.state.data.props.token;
     userId=location.state.data.props.userId;
   }
-  else  if(location?.state?.data != null){
+  else if(location?.state?.data != null){
     token=location.state.data.token;
     userId=location.state.data.userId;
   }
@@ -359,9 +359,9 @@ useEffect(() =>{
    
    <div className="cont">
    <h2 className="Marketheader p-0">Rent Your Car</h2>
-   <form action="/addproduct">
+   <Link state={{ data: {token:token, userId:userId} }} to="/addproduct">
    <button className="torent">Upload Product</button>
-   </form>
+   </Link>
 
    <form className="p-2 formlogin sika" onSubmit={formSubmit}>
   <div className=" bigCont">
